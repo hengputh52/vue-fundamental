@@ -1,12 +1,14 @@
 <script>
 import Counter from './components/Counter.vue';
+import MovieList from './components/MovieList.vue';
+
 export default {
   components: {
-    Counter
+    Counter,
+    MovieList
   },
   data() {
     return {
-      message: "Not Found",
       movies: [
         {
           title: "blade runner 2049",
@@ -22,22 +24,14 @@ export default {
         { title: "Ben 10", cast: ["Charlie Puth"], isFavorite: false },
         { title: "The Boys", cast: ["heng", "meng"], isFavorite: true },
       ],
-    };
-  },
-};
+    }
+  }
+}
+
+
 </script>
 
 <template>
   <Counter />
-  <ul v-for="movie in movies">
-    <li v-if="movie.isFavorite">
-      {{ movie.title.toString() }}
-      <ul>
-        <li>
-          <p v-if="movie.cast.length > 0">{{ movie.cast.toString() }}</p>
-          <p v-else>{{ message }}</p>
-        </li>
-      </ul>
-    </li>
-  </ul>
+  <MovieList :movies="movies" />
 </template>
