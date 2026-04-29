@@ -30,7 +30,22 @@ export default {
         name: 'Heng',
         job: 'Web developer',
         favoriteFrameWork: ['React', 'Vue', 'Typescript']
-      }
+      },
+      lightData: [
+        {
+          name: 'kitchen',
+          isOn: false
+        },
+        {
+          name: 'bedroom',
+          isOn: false
+        },
+        {
+          name: 'living room',
+          isOn: false
+        },
+        
+      ]
     }
   },
   computed: {
@@ -44,6 +59,14 @@ export default {
   methods: {
     changeName() {
       this.userData.name = 'Charlie'
+    }
+  },
+  onToggle(name)
+  {
+    for (light of this.lightData) {
+      if (light.name === name) {
+        light.isOn = !light.isOn
+      }
     }
   }
 }
