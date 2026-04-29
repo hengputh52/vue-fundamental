@@ -1,11 +1,13 @@
 <script>
 import Counter from './components/Counter.vue';
 import MovieList from './components/MovieList.vue';
+import User from './components/User.vue';
 
 export default {
   components: {
     Counter,
-    MovieList
+    MovieList,
+    User
   },
   data() {
     return {
@@ -24,6 +26,20 @@ export default {
         { title: "Ben 10", cast: ["Charlie Puth"], isFavorite: false },
         { title: "The Boys", cast: ["heng", "meng"], isFavorite: true },
       ],
+      userData: {
+        name: 'Heng',
+        job: 'Web developer',
+        favoriteFrameWork: ['React', 'Vue', 'Typescript']
+      }
+    }
+  },
+  computed: {
+    userInformation()
+    {
+      return {
+        name: this.userData.name,
+        job: this.userData.job
+      }
     }
   }
 }
@@ -32,6 +48,8 @@ export default {
 </script>
 
 <template>
+   <!-- <User :name="userData.name" :job="userData.job"/> -->
+   <User :user="userInformation"/>
   <Counter />
   <MovieList :movies="movies" />
 </template>
