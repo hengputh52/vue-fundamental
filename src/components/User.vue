@@ -16,7 +16,8 @@ export default {
             type: String,
             required: true
         },
-    }
+    },
+    emits: ['change-name']
 }
 </script>
 
@@ -27,6 +28,7 @@ export default {
 
     <h2>name: {{ user.name }}</h2>
     <h2>Job: {{ user.job }}</h2>
+    <button @click="$emit('change-name')">Change Name</button>
     <!-- <ul>
         <li v-for="tech in user.favoriteFrameWork">
             {{tech }}

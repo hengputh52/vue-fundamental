@@ -34,12 +34,16 @@ export default {
     }
   },
   computed: {
-    userInformation()
-    {
+    userInformation() {
       return {
         name: this.userData.name,
         job: this.userData.job
       }
+    }
+  },
+  methods: {
+    changeName() {
+      this.userData.name = 'Charlie'
     }
   }
 }
@@ -48,8 +52,8 @@ export default {
 </script>
 
 <template>
-   <!-- <User :name="userData.name" :job="userData.job"/> -->
-   <User :user="userInformation"/>
+  <!-- <User :name="userData.name" :job="userData.job"/> -->
+  <User :user="userInformation" @change-name="changeName"/>
   <Counter />
   <MovieList :movies="movies" />
 </template>
