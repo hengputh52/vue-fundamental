@@ -11,7 +11,12 @@ export default {
 
 <template>
     <h2>{{light.name}}</h2>
-    <h2 v-if="(light.isOn)">The Light is On</h2>
+    <p>{{ light.isOn? 'Light is ON' : 'Light is OFF'}}</p>
+    <button @click="$emit('turnon-light')">{{ light.isOn ? 'Turn off the light' : 'Turn on the light' }}</button>
+
+    <!-- <h2 v-if="(light.isOn)">The Light is On</h2>
     <h2 v-else>The Light is off</h2>
-    <button @click="$emit('turnon-light')">Light Button</button>
+    <button v-if="(!light.isOn)" @click="$emit('turnon-light')">Turn on the Light</button>
+    <button v-else @click="$emit('turnon-light')">Turn off the Light</button>
+     -->
 </template>
