@@ -1,16 +1,17 @@
 <script>
-import Counter from './components/Counter.vue';
-import MovieList from './components/MovieList.vue';
-import User from './components/User.vue';
+import Counter from "./components/Counter.vue";
+import MovieList from "./components/MovieList.vue";
+import User from "./components/User.vue";
 
 export default {
   components: {
     Counter,
     MovieList,
-    User
+    User,
   },
   data() {
     return {
+      favoriteMovie: [],
       movies: [
         {
           title: "blade runner 2049",
@@ -27,56 +28,60 @@ export default {
         { title: "The Boys", cast: ["heng", "meng"], isFavorite: true },
       ],
       userData: {
-        name: 'Heng',
-        job: 'Web developer',
-        favoriteFrameWork: ['React', 'Vue', 'Typescript']
+        name: "Heng",
+        job: "Web developer",
+        favoriteFrameWork: ["React", "Vue", "Typescript"],
       },
       lightData: [
         {
-          name: 'kitchen',
-          isOn: false
+          name: "kitchen",
+          isOn: false,
         },
         {
-          name: 'bedroom',
-          isOn: false
+          name: "bedroom",
+          isOn: false,
         },
         {
-          name: 'living room',
-          isOn: false
+          name: "living room",
+          isOn: false,
         },
-        
-      ]
-    }
+      ],
+    };
   },
   computed: {
     userInformation() {
       return {
         name: this.userData.name,
-        job: this.userData.job
-      }
-    }
+        job: this.userData.job,
+      };
+    },
   },
   methods: {
     changeName() {
-      this.userData.name = 'Charlie'
-    }
-  },
-  onToggle(name)
-  {
-    for (light of this.lightData) {
-      if (light.name === name) {
-        light.isOn = !light.isOn
+      this.userData.name = "Charlie";
+    },
+    addFavorite(payload) {
+      this.favoriteMovie.push(payload);
+    },
+    onToggle(name) {
+      for (light of this.lightData) {
+        if (light.name === name) {
+          light.isOn = !light.isOn;
+        }
       }
-    }
-  }
-}
-
-
+    },
+  },
+};
 </script>
 
 <template>
   <!-- <User :name="userData.name" :job="userData.job"/> -->
-  <User :user="userInformation" @change-name="changeName"/>
+  <User :user="userInformation" @change-name="changeName" />
   <Counter />
-  <MovieList :movies="movies" />
+  <MovieList :movies="movies" @favorite="addFavorite" />
+
+  <h2>Favorite Movies</h2>
+  <ul>
+    <li v-for="favorite in favoriteMovie">{{ favorite }}</li>
+  </ul>
 </template>

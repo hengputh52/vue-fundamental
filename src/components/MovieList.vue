@@ -6,6 +6,12 @@ export default {
       type: Array,
       required: true
     }
+  },
+  emits: ['favorite'],
+  methods: {
+    addToFavorite() {
+      this.$emit('favorite', this.movies)
+    }
   }
 }
 </script>
@@ -17,7 +23,7 @@ export default {
       <ul>
         <li>
           <p v-if="movie.cast.length > 0">{{ movie.cast.toString() }}</p>
-          <button>Add to Favorite</button>
+          <button @click="addToFavorite">Add to Favorite</button>
         </li>
       </ul>
     </li>

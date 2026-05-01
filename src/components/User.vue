@@ -8,14 +8,14 @@ export default {
         },
 
         // optimized the props avoid passing all the data
-        name: {
-            type: String,
-            required: true
-        },
-        job: {
-            type: String,
-            required: true
-        },
+        // name: {
+        //     type: String,
+        //     required: true
+        // },
+        // job: {
+        //     type: String,
+        //     required: true
+        // },
     },
     emits: ['change-name']
 }
