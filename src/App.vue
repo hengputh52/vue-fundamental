@@ -2,12 +2,16 @@
 import Counter from "./components/Counter.vue";
 import MovieList from "./components/MovieList.vue";
 import User from "./components/User.vue";
+import baseButton from "./components/base-button.vue";
+import Layout from "./components/layout.vue";
 
 export default {
   components: {
     Counter,
     MovieList,
     User,
+    baseButton,
+    Layout,
   },
   data() {
     return {
@@ -75,13 +79,21 @@ export default {
 </script>
 
 <template>
-  <!-- <User :name="userData.name" :job="userData.job"/> -->
-  <User :user="userInformation" @change-name="changeName" />
-  <Counter />
-  <MovieList :movies="movies" @favorite="addFavorite" />
+  <Layout>
+    <template v-slot:footer>
+      <User :user="userInformation" @change-name="changeName" />
+    </template>
+    <template v-slot:sidebar>
+      <Counter />
+      <MovieList :movies="movies" @favorite="addFavorite" />
+    </template>
+    <template v-slot:main>
+      <h2>Favorite Movies</h2>
+      <ul>
+        <li v-for="favorite in favoriteMovie">{{ favorite }}</li>
+      </ul>
+    </template>
 
-  <h2>Favorite Movies</h2>
-  <ul>
-    <li v-for="favorite in favoriteMovie">{{ favorite }}</li>
-  </ul>
+  </Layout>
+  <!-- <User :name="userData.name" :job="userData.job"/> -->
 </template>
