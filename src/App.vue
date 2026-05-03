@@ -1,10 +1,13 @@
 <script>
+import { Suspense } from 'vue';
 import HomePage from './components/home-page.vue';
 import LogInPage from './components/log-in.vue';
+import UserDataPage from './components/user-page.vue'
 export default {
   components: {
     HomePage,
-    LogInPage
+    LogInPage,
+    UserDataPage
   },  
   beforeCreate() {
     console.log('before created')
@@ -31,6 +34,9 @@ export default {
     },
     showLogInPage() {
       this.currrentPage = 'LogIn'
+    },
+    showUserDataPage() {
+      this.currrentPage = 'UserData'
     }
   },
   created() {
@@ -51,14 +57,21 @@ export default {
     <div class="right-side">
       <a href="#" @click.prevent="showHomePage">home page</a>
       <a href="#" @click.prevent="showLogInPage">log in</a>
+      <a href="#" @click.prevent="showUserDataPage">User Page</a>
     </div>
   </nav>
 
   
     <!-- <homePage v-if="currrentPage === 'Home'" />
     <LogIn v-else/> -->
-  
-  <component :is="renderPage"/>
+  <Suspense>
+     <component :is="renderPage"/>
+
+     <template v-slot:fallback>
+      <p>loading data ....</p>
+     </template>
+  </Suspense>
+ 
 
 </template>
 
