@@ -15,8 +15,8 @@
 
 <style>
 .grid{
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
+  display: flex;
+  flex-direction: column;
 }
 .sidebar {
   border: 1px solid red;

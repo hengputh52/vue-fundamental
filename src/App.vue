@@ -1,58 +1,31 @@
-<script>
-import { Suspense } from 'vue';
+<script setup>
+import { Suspense, ref } from 'vue';
 import HomePage from './components/home-page.vue';
 import LogInPage from './components/log-in.vue';
 import UserDataPage from './components/user-page.vue'
-export default {
-  components: {
-    HomePage,
-    LogInPage,
-    UserDataPage
-  },  
-  beforeCreate() {
-    console.log('before created')
-    console.log(this.pokemon)
-  },
 
-  data: () => {
-    return {
-      tech: [1, 2, 3],
-        currrentPage: 'Home'
-      }
-  },
-  computed: {
-    renderPage() {
-      return this.currrentPage + 'Page'
-    }
-  },  
-  methods: {
-    async fetchPokemon() {
-        this.tech = await fetch('https://api.restful-api.dev/objects').then(response => response.json())
-    },
-    showHomePage() {
-        this.currrentPage = 'Home'
-    },
-    showLogInPage() {
-      this.currrentPage = 'LogIn'
-    },
-    showUserDataPage() {
-      this.currrentPage = 'UserData'
-    }
-  },
-  created() {
-    console.log('created')
-    this.fetchPokemon()
-  }
-  }
+const tech = ref([1, 2, 3])
+const currrentPage = ref(HomePage)
+
+
+const showHomePage = () => {
+  currrentPage.value = HomePage
+}
+const showLogInPage = () => {
+  currrentPage.value = LogInPage
+}
+const showUserDataPage = () => {
+  currrentPage.value = UserDataPage
+}
+
 </script>
 
 <template>
-  <!-- <h1>New app</h1>
-  <button @click="fetchPokemon">fetch pokemon</button>
-  <pre>{{ tech }}</pre> -->
   <nav>
     <div>
       <h1>Home page</h1>
+      <h2>{{ tech }}</h2>
+      
     </div>
     <div class="right-side">
       <a href="#" @click.prevent="showHomePage">home page</a>
@@ -62,10 +35,8 @@ export default {
   </nav>
 
   
-    <!-- <homePage v-if="currrentPage === 'Home'" />
-    <LogIn v-else/> -->
   <Suspense>
-     <component :is="renderPage"/>
+     <component :is="currrentPage"/>
 
      <template v-slot:fallback>
       <p>loading data ....</p>

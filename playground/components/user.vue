@@ -1,7 +1,6 @@
-<script>
+<script setup>
 import { ref, computed, reactive} from 'vue'
-export default {
-  async setup() {
+
     const regionName = ref("kanto");
     const userData = await fetch(
       "https://jsonplaceholder.typicode.com/users",
@@ -15,24 +14,14 @@ export default {
       return state.message.toUpperCase()
     })
 
+    const changeName = () => {
+      regionName.value = 'Hoenn'
+    }
+
     const state = reactive({
       message: 'hello'
     })
-    console.log(regionName)
-
-    return {
-      userData,
-      regionName,
-      regionNameAllCap,
-      stateAllCap
-    };
-  },
-  methods: {
-    changeName() {
-      this.regionName = 'Hoenn'
-    }
-  }
-};
+    console.log(changeName)
 </script>
 
 <template>

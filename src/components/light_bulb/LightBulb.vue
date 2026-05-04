@@ -1,18 +1,17 @@
-<script>
-export default {
-  props: {
-    light: {
-      type: Object,
-      required: true,
-    },
-  },
-  emits: ["turnon-light"],
-  methods: {
-    turnOnLight() {
-      this.$emit("turnon-light");
-    },
-  },
-};
+<script setup>
+import { defineProps, defineEmits } from 'vue'
+
+const props = defineProps({
+  light: {
+    type: Object
+  }
+})
+
+const emit = defineEmits(['turnon-light'])
+
+const turnOnLight = () => {
+  emit('turnon-light')
+}
 </script>
 
 <template>

@@ -95,5 +95,4 @@ export default {
         </template>
 
     </Layout>
-    <!-- <User :name="userData.name" :job="userData.job"/> -->
 </template>
