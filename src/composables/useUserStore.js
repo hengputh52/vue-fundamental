@@ -1,11 +1,14 @@
 import { ref } from 'vue'
+const userList = ref([])
 export async function fetchUserData() {
-  const response = await fetch(
+  userList.value = await fetch(
     "https://jsonplaceholder.typicode.com/users",
   ).then((response) => response.json());
-  return response;
+  return {
+    userList
+  };
 }
-export const dataUser = await fetchUserData()
+
 export const userNumber = ref([1, 2, 3])
 
 

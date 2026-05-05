@@ -1,6 +1,7 @@
 <script setup>
-import { dataUser, userNumber} from '../composables/useUserStore'
-
+import { fetchUserData, userNumber} from '../composables/useUserStore'
+const users = await fetchUserData()
+console.log(users.userList.value)
 
 </script>
 <template>
@@ -9,10 +10,10 @@ import { dataUser, userNumber} from '../composables/useUserStore'
     <h1>{{ userNumber }}</h1>
   </header>
   <ul>
-    <l v-for="user in dataUser" :key="user.id">
+    <li v-for="user in users.userList.value" :key="user.id">
       <pre>
-     {{ user.name }}: {{ user.website }}
+      {{ user.name }} : {{ user.website }}
       </pre>
-    </l>
+    </li>
   </ul>
 </template>
